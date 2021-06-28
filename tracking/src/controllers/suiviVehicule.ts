@@ -20,7 +20,9 @@ export const createVehicleState = async (req: Request, res: Response) => {
         fuelLevel :req.body.fuelLevel,
         oilPressure :req.body.oilPressure,
         batteryCharge :req.body.batteryCharge,
-        brakeFuild :req.body.breakFuild
+        brakeFuild :req.body.breakFuild,
+        vidange :req.body.vidange
+
     })
 
     await vehicle_state.save()
@@ -58,6 +60,8 @@ export async function updateVehicleState(req: Request, res: Response) {
         vehicle_state.oilPressure =req.body.oilLevel || vehicle_state.oilPressure,
         vehicle_state.batteryCharge =req.body.batteryCharge || vehicle_state.batteryCharge,
         vehicle_state.brakeFuild =req.body.breakFuild || vehicle_state.brakeFuild
+        vehicle_state.vidange =req.body.vidange || vehicle_state.vidange
+
 
         await vehicle_state.save()
         return res.json(vehicle_state)
