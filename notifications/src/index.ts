@@ -42,7 +42,7 @@ createConnection();
 
 // start server and socket event listener
 http.listen(PORT, () => {
-    console.log(`Notification server listening on port 8004`);
+    console.log(`Notification server listening on port ${PORT} : (docker 8004)`);
     io.on("connection", (socket: any) => {
         socket.on("messageSent", (message: any) => {
             socket.broadcast.emit("messageSent", message);
