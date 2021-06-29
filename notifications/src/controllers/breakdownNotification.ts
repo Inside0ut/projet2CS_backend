@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { BreakdownNotification } from "../entity/BreakdownNotification";
+import { Panne } from "../entity/Panne";
 
 export const addBreakdown = async  (req: Request, res: Response) => {
     const { read, idPanne } = req.body;
@@ -21,7 +22,20 @@ export const addBreakdown = async  (req: Request, res: Response) => {
 export const getBreakdown = async (_req: Request, res: Response) => {
     try{
         const breakdownNotif = await BreakdownNotification.find();
-        return res.json(breakdownNotif);
+
+        let breakdowns:any[] = [];
+
+        for (var i = 0; i < breakdownNotif.length; i++){
+
+            let breakdown = await Panne.findOneOrFail({idPanne: breakdownNotif[i].idPanne});
+
+            breakdowns[i] = Object.assign(breakdownNotif[i], breakdown);
+
+        }
+           
+
+        return res.json(breakdowns);
+
     } catch(err){
         console.log(err);
         return res.status(500).json(err);
