@@ -10,5 +10,4 @@ router.get('/getVehicleInformations', getVehicleInfos);
 router.get('/getRentalInfo', getRentalInfo);
 router.post('/createVs', createVehicleState);
 
-
 export default router;
