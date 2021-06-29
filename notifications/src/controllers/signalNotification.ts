@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { SignalNotification } from "../entity/SignalNotification";
+import { Signal } from "../entity/Signal";
 
 export const addSignal = async  (req: Request, res: Response) => {
     const { read, idSignal } = req.body;
@@ -21,7 +22,19 @@ export const addSignal = async  (req: Request, res: Response) => {
 export const getSignal = async (_req: Request, res: Response) => {
     try{
         const signalNotif = await SignalNotification.find();
-        return res.json(signalNotif);
+
+        let theftSignals:any[] = [];
+
+        for (var i = 0; i < signalNotif.length; i++){
+
+            let theft = await Signal.findOneOrFail({idSignal: signalNotif[i].idSignal});
+
+            theftSignals[i] = Object.assign(signalNotif[i], theft);
+        }
+
+        
+        return res.json(theftSignals);
+
     } catch(err){
         console.log(err);
         return res.status(500).json(err);
