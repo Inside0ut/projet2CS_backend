@@ -32,4 +32,7 @@ export class VehicleState extends BaseEntity {
 
     @Column()
     kilos:number;
+
+    @Column()
+    vidange:number;
 }
