@@ -4,6 +4,8 @@ import { stat } from "node:fs";
 import { VehicleState } from "../entity/VehicleState";
 import { Vehicle } from "../entity/Vehicle";
 import { Rental } from "../entity/Rental";
+import { Tenant } from "../entity/Tenant";
+import { User } from "../entity/User";
 
 
 export const get = (_req: Request, res: Response) => {
@@ -50,16 +52,60 @@ export async function getVehicleInfos(req: Request, res: Response) {
         //get vehicle information
         const vehicle= await Vehicle.findOneOrFail({chassisNumber:chassis})
         //get Rental 
-        const rental = await Rental.find({idVehicle:vehicle.idVehicle})
+        const rental = await Rental.find({idVehicle:vehicle.idVehicle,rentalstate:"active"})
        //get vehicle stat
        const vehicleState = await VehicleState.findOneOrFail({idRental:rental[rental.length-1].idRental})
 
-        resultat=Object.assign(vehicle,vehicleState)
+        resultat=Object.assign(vehicleState)
         return res.status(200).json(resultat)
     } catch (error) {
         console.error()
         return res.status(500).json(error)
     }
-}    
+}
+export async function getRentalInfo(req: Request, res: Response) {
+    const chassis= String(req.query.chassisNumber)
+    var resultat={}
+    try {
+        //get vehicle information
+        const vehicle= await Vehicle.findOneOrFail({chassisNumber:chassis})
+        //get Rental 
+        const rental = await Rental.find({idVehicle:vehicle.idVehicle,rentalstate:"active"})
+        //get name of tenant
+        const tenant= await Tenant.findOneOrFail({idTenant:rental[rental.length-1].idTenant})
+        const user= await User.findOneOrFail({idUser:tenant.idUser})
+
+        resultat={
+            idRental:rental[rental.length-1].idRental,
+            idVehicle:vehicle.idVehicle,
+            tenantFirstName:user.firstName,
+            tenantLastName:user.lastName
+        }
+        return res.status(200).json(resultat)
+    } catch (error) {
+        console.error()
+        return res.status(500).json(error)
+    }
+}     
+
+export async function createVehicleState(req: Request, res: Response) {
+    const chassis= String(req.query.chassisNumber)
+    var resultat={}
+    try {
+        //get vehicle information
+        const vehicle= await Vehicle.findOneOrFail({chassisNumber:chassis})
+        //get Rental 
+        const rental = await Rental.find({idVehicle:vehicle.idVehicle,rentalstate:"active"})
+
+        const vehicleState= VehicleState.create({
+        idRental:rental[rental.length-1].idRental
+        })
+        await vehicleState.save()
+        return res.status(200).json(vehicleState)
+    } catch (error) {
+        console.error()
+        return res.status(500).json(error)
+    }
+} 
 
 
