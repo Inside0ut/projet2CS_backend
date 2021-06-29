@@ -9,10 +9,11 @@ export class VehicleState extends BaseEntity {
 
     @Column()
     availability: string;
-   
-    @Column()
-    idBorne: number;
+ 
 
     @Column()
     idRental:number;
+
+    @Column()
+    idBorne:number;
 }
