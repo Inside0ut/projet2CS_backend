@@ -33,7 +33,4 @@ export class VehicleState extends BaseEntity {
     @Column()
     speed:number;
 
-    @Column()
-    vidange:number;
-
 }
