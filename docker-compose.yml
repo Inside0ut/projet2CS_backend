@@ -95,7 +95,6 @@ services:
     environment:
       NODE_ENV: development
       DEBUG: src:*
-
   borne-vehicule:
     build:
       context: ./borne-vehicule
@@ -137,7 +136,6 @@ services:
     environment:
       NODE_ENV: development
       DEBUG: src:*
-
   stats:
     build:
       context: ./stats
@@ -165,7 +163,6 @@ services:
     environment:
       NODE_ENV: development
       DEBUG: src:*
-
   location:
     build:
       context: ./position_bylocation
