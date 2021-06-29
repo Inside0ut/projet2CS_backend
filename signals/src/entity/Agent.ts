@@ -8,7 +8,7 @@ export class Agent extends BaseEntity {
     idAgent: number;
 
     @Column()
-    idUtilisateur:number;
+    idUser:number;
 
     @Column()
     nom:String;
@@ -20,6 +20,6 @@ export class Agent extends BaseEntity {
     adresse:String;
 
     @Column()
-    photo:String;
+    personalPhoto:String;
 
 }

@@ -7,7 +7,7 @@ export class Vehicle extends BaseEntity {
     idVehicle: number;
 
     @Column()
-    vehicletype: string;
+    vehicleType: string;
 
     @Column()
     vehiclemodel: string;
@@ -28,8 +28,24 @@ export class Vehicle extends BaseEntity {
     availibility:string;
 
     @Column()
-    unitpriceperhour:number;
+    unitPricePerHour:number;
 
     @Column()
-    unitpriceperday:number;
+    unitPricePerDay:number;
+
+    @Column()
+    idBorne:number;
+
+    @Column()
+    fuelType:string;
+
+    @Column()
+    longitude:number;
+
+    @Column()
+    latitude:number;
+
+    @Column()
+    chassisNumber:string;
+    
 }
