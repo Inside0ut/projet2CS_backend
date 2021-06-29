@@ -47,6 +47,7 @@ export const addVehicule = async (req: Request, res: Response) => {
     vehicleColor: req.body.vehicleColor,
     longitude: req.body.longitude,
     latitude: req.body.latitude,
+    availibility:req.body.availibility
   });
 
   vehicule

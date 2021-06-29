@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { addBreakdown, getBreakdown, readBreakdown, deleteBreakdown } from '../controllers/breakdownNotification';
 import { addSignal, getSignal, readSignal, deleteSignal} from '../controllers/signalNotification';
+import { getNotifications } from '../controllers/Notification'
 
 
 const router = Router();
@@ -9,6 +10,8 @@ const router = Router();
 router.get('/', (_req: Request, res: Response) => {
     res.sendFile(__dirname + "/" + "index.html");
 });
+
+router.get('/notifications', getNotifications);
 
 // breakdown notifications
 
