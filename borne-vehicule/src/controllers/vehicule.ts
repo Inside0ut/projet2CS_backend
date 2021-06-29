@@ -36,6 +36,7 @@ export const getVehiculesByBorneId = async (req: Request, res: Response) => {
 export const addVehicule = async (req: Request, res: Response) => {
   const vehicule = Vehicule.create({
     registrationNumber: req.body.registrationNumber,
+    chassisNumber:req.body.chassisNumber,
     unitPricePerHour: req.body.unitPricePerHour,
     unitPricePerDay: req.body.unitPricePerDay,
     vehicleType: req.body.vehicleType,

@@ -42,6 +42,9 @@ export class Vehicule extends BaseEntity {
   @Column()
   image: String;
 
+  @Column()
+  chassisNumber: String;
+
   @Column({
     type: "enum",
     enum: ["available", "unavailable"],
