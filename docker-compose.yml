@@ -96,21 +96,6 @@ services:
     environment:
       NODE_ENV: development
       DEBUG: src:*
-
-  tracking:
-    build:
-      context: ./tracking
-      target: development
-    volumes:
-      - ./tracking:/src
-      - /src/node_modules
-    command: npm run start:dev
-    ports:
-      - "8003:8001"
-    environment:
-      NODE_ENV: development
-      DEBUG: src:*
-
   borne-vehicule:
     build:
       context: ./borne-vehicule
@@ -190,6 +175,20 @@ services:
     ports:
       - "8500:8000"
     environment: 
+      NODE_ENV: development
+      DEBUG: src:*
+      
+  tracking:
+    build:
+      context: ./tracking
+      target: development
+    volumes:
+      - ./tracking:/src
+      - /src/node_modules
+    command: npm run start:dev
+    ports:
+      - "8003:8001"
+    environment:
       NODE_ENV: development
       DEBUG: src:*
       
