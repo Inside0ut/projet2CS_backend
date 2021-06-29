@@ -8,7 +8,7 @@ router.get('/', get);
 router.post('/AddTechDetails', add_techDetails_ByLocation);
 router.get('/getVehicleInformations', getVehicleInfos);
 router.get('/getRentalInfo', getRentalInfo);
-router.post('/getRentalInfo', createVehicleState);
+router.post('/createVehiculeState', createVehicleState);
 
 
 export default router;
