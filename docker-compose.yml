@@ -7,7 +7,6 @@ services:
       - 6380:6379
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
-
   association:
     build:
       context: ./association
@@ -177,7 +176,7 @@ services:
     environment: 
       NODE_ENV: development
       DEBUG: src:*
-      
+
   tracking:
     build:
       context: ./tracking
@@ -191,4 +190,32 @@ services:
     environment:
       NODE_ENV: development
       DEBUG: src:*
-      
+  signals:
+    build:
+      context: ./signals
+      target: development
+    volumes:
+      - ./signals:/src
+      - /src/node_modules
+    command: npm run start:dev
+    ports:
+      - "8111:8000"
+    environment:
+      NODE_ENV: development
+      DEBUG: src:*
+  auto_signal:
+    build:
+      context: ./auto_signal
+      target: development
+    volumes:
+      - ./auto_signal:/src
+      - /src/node_modules
+    command: npm run start:dev
+    ports:
+      - "8022:8000"
+    environment:
+      NODE_ENV: development
+      DEBUG: src:*
+
+
+
