@@ -19,7 +19,7 @@ export class VehicleState extends BaseEntity {
     engineTemp:number;
 
     @Column()
-    fuelLevel:number;
+    fuelLevel:number; 
 
     @Column()
     oilPressure:number;
