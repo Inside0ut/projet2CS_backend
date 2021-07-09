@@ -2,13 +2,16 @@
    "dependencies": {
       "@types/cors": "^2.8.10",
       "@types/morgan": "^1.9.2",
+      "all": "^0.0.0",
       "cors": "^2.8.5",
       "express": "^4.17.1",
       "global": "^4.4.0",
+      "json": "^11.0.0",
       "morgan": "^1.10.0",
       "pdfkit": "^0.12.1",
       "pg": "^8.6.0",
       "reflect-metadata": "^0.1.13",
+      "request": "^2.88.2",
       "typeorm": "0.2.32"
    },
    "devDependencies": {

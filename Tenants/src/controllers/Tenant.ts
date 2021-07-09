@@ -14,3 +14,15 @@ export async function getTenants(_req:Request, res:Response){ //outputs : idUser
       }
   res.json(user)
 }
+
+export async function banTenantAccount(req:Request, res:Response){ //outputs : idUser
+  const id=Number(req.query.idTenant)
+  try{
+  const tenant =await Tenant.findOneOrFail({idTenant:id}); 
+  tenant.accountState="banned"
+  tenant.save()
+  res.status(200).json({message:"Account successfuly updated"})
+  }catch(err){
+    res.status(500)
+  }
+}
