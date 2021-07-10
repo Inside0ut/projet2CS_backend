@@ -4,6 +4,9 @@ import {Rental,rental_status_enum} from "../entity/Rental";
 import {Tenant} from "../entity/Tenant";
 import { User } from "../entity/User";
 import { Borne } from "../entity/Borne";
+import { VehiclePosition } from "../entity/VehiclePosition";
+import { VehicleTracking } from "../entity/VehicleTracking";
+import { Vehicle } from "../entity/Vehicle";
 
 
 export const get =  (_req: Request, res: Response) => {
@@ -126,4 +129,29 @@ export async function findVehicleRental(req: Request, res: Response) {
         console.error()
         return res.status(500).json(error)
     }
-}   
+} 
+
+export async function updateVehiclePosition(req: Request, res: Response) {
+    const id= Number(req.query.idRental)
+    try {
+        //get position from idRental
+        const position= await VehiclePosition.findOneOrFail({idRental:id})
+        //get Vehicle tracking
+        const tracking=await VehicleTracking.find({idPosition:position.idPosition  }&&{ 
+            order: {
+                created_at:'DESC'
+               
+            }
+            })
+        //get vehicle
+        const rental=await Rental.findOneOrFail({idRental:id})
+        const vehicle=await Vehicle.findOneOrFail({idVehicle:rental.idVehicle})
+        vehicle.latitude=tracking[0].latitude
+        vehicle.longitude=tracking[0].longitude
+        vehicle.save()
+        return res.status(200).json({message :"position is uptaded"})
+    } catch (error) {
+        console.error()
+        return res.status(500).json(error)
+    }
+} 
