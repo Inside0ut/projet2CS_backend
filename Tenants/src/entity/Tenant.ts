@@ -9,4 +9,7 @@ export class Tenant extends BaseEntity {
     @Column()
     idUser: number;
 
+    @Column()
+    accountState: string;
+
 }
