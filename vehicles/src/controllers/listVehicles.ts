@@ -4,7 +4,6 @@ import { Rental } from "../entity/Rental";
 import { Vehicle } from "../entity/Vehicle";;
 import { Tenant } from "../entity/Tenant";
 import { User } from "../entity/User";
-import { count } from "node:console";
 
 export const get = (_req: Request, res: Response) => {
     res.end("Vehicles Service");
@@ -32,7 +31,7 @@ export async function getVehicles(req: Request, res: Response) {
             const vehicle=await Vehicle.findOneOrFail(vehicles[i])
             const tenant = await Tenant.findOneOrFail(rental.idTenant)
             const user= await User.findOneOrFail(tenant.idUser)
-            vehicles[i]=Object.assign(vehicle,tenant,user, rental)
+            vehicles[i]=Object.assign(vehicle,tenant,user,rental)
        }
     }
     let nbVehicles=await Vehicle.count()

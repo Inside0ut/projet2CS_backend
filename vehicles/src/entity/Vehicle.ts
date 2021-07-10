@@ -1,4 +1,4 @@
-import {Entity, PrimaryGeneratedColumn, Column, BaseEntity, Double} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, BaseEntity} from "typeorm";
 
 @Entity("Vehicle")
 export class Vehicle extends BaseEntity {
@@ -47,5 +47,6 @@ export class Vehicle extends BaseEntity {
 
     @Column()
     chassisNumber:string;
+    
     
 }

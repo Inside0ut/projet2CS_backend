@@ -2,10 +2,10 @@ import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import { getConnection } from "typeorm";
 
-import { Vehicule } from "../entity/Vehicule";
+import { Vehicle } from "../entity/Vehicle";
 
 export const getVehicule = (req: Request, res: Response) => {
-  Vehicule.findOne({ idVehicle: parseInt(req.params.idVehicule) })
+  Vehicle.findOne({ idVehicle: parseInt(req.params.idVehicule) })
     .then((vehicule: any) => {
       res.status(200).send(vehicule);
     })
@@ -21,7 +21,7 @@ export const getVehiculesByBorneId = async (req: Request, res: Response) => {
     const vehicles = await getConnection()
       .createQueryBuilder()
       .select("Vehicle")
-      .from(Vehicule, "Vehicle")
+      .from(Vehicle, "Vehicle")
       .where("Vehicle.idBorne = :id", { id: parseInt(req.params.idBorne) })
       .getMany();
       
@@ -33,8 +33,9 @@ export const getVehiculesByBorneId = async (req: Request, res: Response) => {
   }
 };
 
-export const addVehicule = async (req: Request, res: Response) => {
-  const vehicule = Vehicule.create({
+
+export async function addVehicule(req: Request, res: Response) {
+  const vehicule = Vehicle.create({
     registrationNumber: req.body.registrationNumber,
     chassisNumber:req.body.chassisNumber,
     unitPricePerHour: req.body.unitPricePerHour,
@@ -48,7 +49,7 @@ export const addVehicule = async (req: Request, res: Response) => {
     longitude: req.body.longitude,
     latitude: req.body.latitude,
     availibility:req.body.availibility
-  });
+  })
 
   vehicule
     .save()
@@ -58,12 +59,12 @@ export const addVehicule = async (req: Request, res: Response) => {
     .catch((e) => {
       res.status(500).send({ message: e.message });
     });
-};
+}
 
 export async function getVehicules(_req: Request, res: Response) {
-  Vehicule.find()
-    .then((vehicules) => {
-      res.status(200).json(vehicules);
+  Vehicle.find()
+    .then((vehicles) => {
+      res.status(200).json(vehicles);
     })
     .catch((e) => {
       console.log(e)
@@ -90,7 +91,7 @@ export const updateVehicule = async (req: Request, res: Response) => {
     });
   }
 
-  Vehicule.update(
+  Vehicle.update(
     { idVehicle: parseInt(req.params.idVehicule) },
     {
       registrationNumber: req.body.registrationNumber,
@@ -125,7 +126,7 @@ export const updateVehicule = async (req: Request, res: Response) => {
 };
 
 export const deleteVehicule = async (req: Request, res: Response) => {
-  Vehicule.delete({ idVehicle: parseInt(req.params.idVehicule) })
+  Vehicle.delete({ idVehicle: parseInt(req.params.idVehicule) })
     .then(() => {
       return res
         .status(200)
