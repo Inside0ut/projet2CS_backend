@@ -44,6 +44,7 @@ export const addSignal = async (req: Request, res: Response) => {
         sourceType: req.body.sourceType,
         idVehicle: req.body.idVehicle,
         sent_at: req.body.sent_at,
+        validatedByAgent:1
     })
 
     await signal.save()

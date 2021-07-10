@@ -21,5 +21,4 @@ router.put('/validate_signal',validateSignal)
 router.get('/getValidatePanneSignal',getValidateSignalPannes)
 
 
-
 export default router;
