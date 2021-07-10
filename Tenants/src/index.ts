@@ -16,7 +16,7 @@ app.use(morgan("dev"))
 app.use(Router)
 
 createConnection().then(async _connection => {   
-    app.listen(8000, () => {
+    app.listen(8564, () => {
         console.log("server started.")
     })
     
