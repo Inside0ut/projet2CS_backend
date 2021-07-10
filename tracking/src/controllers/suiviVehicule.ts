@@ -53,7 +53,7 @@ export async function updateVehicleState(req: Request, res: Response) {
     const id= Number(req.params.idVehicle)
     try {
        // const vehicle_state = await VehicleState.findOneOrFail(id)
-        const rental= await Rental.findOneOrFail({idVehicle:id,rentalstate:"active"})
+        const rental= await Rental.findOneOrFail({idVehicle:id,rentalstate:"paid"})
         const vehicle_state=await VehicleState.findOneOrFail({idRental:rental.idRental})
         vehicle_state.idRental=req.body.idRental||vehicle_state.idRental,
         vehicle_state.idBorne =req.body.idBorne||vehicle_state.idBorne,
@@ -103,7 +103,7 @@ export async function findVehicleState(req: Request, res: Response) {
     const id= Number(req.query.idVehicle)
     try {
          //return rental active of a vehicle if exist 
-         const rental= await Rental.findOneOrFail({idVehicle:id,rentalstate:"active"})
+         const rental= await Rental.findOneOrFail({idVehicle:id,rentalstate:"paid"})
          const vehicle_state=await VehicleState.findOneOrFail({idRental:rental.idRental})
 
         return res.json(vehicle_state)
@@ -118,7 +118,7 @@ export async function findVehicleRental(req: Request, res: Response) {
     var resultat={}
     try {
         //return rental active of a vehicle if exist 
-        const rental= await Rental.findOneOrFail({idVehicle:id,rentalstate:"active"})
+        const rental= await Rental.findOneOrFail({idVehicle:id,rentalstate:"paid"})
         //return tenant of vehicle 
         const tenant=await Tenant.findOneOrFail(rental.idTenant)
         const user=await User.findOneOrFail(tenant.idUser)

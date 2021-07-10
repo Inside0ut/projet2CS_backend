@@ -52,7 +52,7 @@ export async function getVehicleInfos(req: Request, res: Response) {
         //get vehicle information
         const vehicle= await Vehicle.findOneOrFail({chassisNumber:chassis})
         //get Rental 
-        const rental = await Rental.find({idVehicle:vehicle.idVehicle,rentalstate:"active"})
+        const rental = await Rental.find({idVehicle:vehicle.idVehicle,rentalstate:"paid"})
        //get vehicle stat
        const vehicleState = await VehicleState.findOneOrFail({idRental:rental[rental.length-1].idRental})
 
@@ -70,7 +70,7 @@ export async function getRentalInfo(req: Request, res: Response) {
         //get vehicle information
         const vehicle= await Vehicle.findOneOrFail({chassisNumber:chassis})
         //get Rental 
-        const rental = await Rental.find({idVehicle:vehicle.idVehicle,rentalstate:"active"})
+        const rental = await Rental.find({idVehicle:vehicle.idVehicle,rentalstate:"paid"})
         //get name of tenant
         const tenant= await Tenant.findOneOrFail({idTenant:rental[rental.length-1].idTenant})
         const user= await User.findOneOrFail({idUser:tenant.idUser})
@@ -95,7 +95,7 @@ export async function createVehicleState(req: Request, res: Response) {
         //get vehicle information
         const vehicle= await Vehicle.findOneOrFail({chassisNumber:chassis})
         //get Rental 
-        const rental = await Rental.find({idVehicle:vehicle.idVehicle,rentalstate:"active"})
+        const rental = await Rental.find({idVehicle:vehicle.idVehicle,rentalstate:"paid"})
 
         const vehicleState= VehicleState.create({
         idRental:rental[rental.length-1].idRental

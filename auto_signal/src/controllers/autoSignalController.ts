@@ -44,7 +44,7 @@ export const createSignalTime = async (req: Request, res: Response) => {
     try{
         const id=Number(req.query.idVehicle)
         var currdatetime = new Date();
-        const rental= await Rental.findOneOrFail({idVehicle:id,rentalstate:"active"})
+        const rental= await Rental.findOneOrFail({idVehicle:id,rentalstate:"paid"})
         const restitutionDate = new Date(
             (rental.restitutionDate!!).toUTCString()
                                       .replace("00:00:00", 
