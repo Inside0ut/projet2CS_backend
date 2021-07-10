@@ -203,6 +203,21 @@ services:
     environment:
       NODE_ENV: development
       DEBUG: src:*
+
+  tenant:
+    build:
+      context: ./tenants
+      target: development
+    volumes:
+      - ./tenants:/src
+      - /src/node_modules
+    command: npm run start:dev
+    ports:
+      - "8564:8000"
+    environment:
+      NODE_ENV: development
+      DEBUG: src:*
+    
   auto_signal:
     build:
       context: ./auto_signal
@@ -216,19 +231,6 @@ services:
     environment:
       NODE_ENV: development
       DEBUG: src:*
-  tenants:
-    build:
-      context: ./tenants
-      target: development
-    volumes:
-      - ./tenants:/src
-      - /src/node_modules
-    command: npm run start:dev
-    ports:
-      - "8564:8000"
-    environment:
-      NODE_ENV: development
-      DEBUG: src:*
-
+ 
 
 
