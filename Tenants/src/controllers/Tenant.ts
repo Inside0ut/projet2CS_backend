@@ -26,3 +26,29 @@ export async function banTenantAccount(req:Request, res:Response){ //outputs : i
     res.status(500)
   }
 }
+export async function getTenantsInfo(_req:Request, res:Response){ //outputs : idUser
+  try{
+    var i=0;
+    var j=0;
+    var m=0;
+    var result=[]
+    var pending=[]
+  const tenant =await Tenant.find(); 
+  for(i=0;i<tenant.length;i++){
+    const user =await User.findOneOrFail({idUser:tenant[i].idUser});
+    if(tenant[i].accountState=="pending"){
+    pending[j]=Object.assign(tenant[i],user)
+    j++
+    }
+    else {
+    result[m]=Object.assign(tenant[i],user)
+    m++
+    }
+  }
+  result.sort((a, b) => (a.accountState > b.accountState) ? 1 : -1)
+  //const list=Object.assign(pending,result)
+  res.status(200).json(pending.concat(result))
+  }catch(err){
+    res.status(500)
+  }
+}

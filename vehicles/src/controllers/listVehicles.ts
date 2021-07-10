@@ -26,7 +26,7 @@ export async function getVehicles(req: Request, res: Response) {
     .getRawMany()
 
     for(var i=0;i<vehicles.length;i++){
-        const rental = await Rental.findOne({idVehicle:vehicles[i].idVehicle,rentalstate:"active"});
+        const rental = await Rental.findOne({idVehicle:vehicles[i].idVehicle,rentalstate:"paid"});
         if (rental){  
             const vehicle=await Vehicle.findOneOrFail(vehicles[i])
             const tenant = await Tenant.findOneOrFail(rental.idTenant)
