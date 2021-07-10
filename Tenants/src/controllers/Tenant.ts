@@ -16,9 +16,9 @@ export async function getTenants(_req:Request, res:Response){ //outputs : idUser
 }
 
 export async function banTenantAccount(req:Request, res:Response){ //outputs : idUser
-  const id=Number(req.query.idTenant)
+  const id=Number(req.query.idUser)
   try{
-  const tenant =await Tenant.findOneOrFail({idTenant:id}); 
+  const tenant =await Tenant.findOneOrFail({idUser:id}); 
   tenant.accountState="banned"
   tenant.save()
   res.status(200).json({message:"Account successfuly updated"})
