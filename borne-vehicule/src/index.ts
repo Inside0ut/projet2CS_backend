@@ -17,8 +17,8 @@ app.use(Router);
 
 createConnection()
   .then(async (_connection: Connection) => {
-    app.listen(9000, () => {
-      console.log("Service Borne-Vehicule Up On PORT : 9000 🆙");
+    app.listen(8200, () => {
+      console.log("Service Borne-Vehicule Up On PORT : 8200 🆙");
     });
   })
   .catch((error: Error) => console.log(error));

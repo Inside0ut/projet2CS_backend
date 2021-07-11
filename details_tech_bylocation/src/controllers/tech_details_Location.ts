@@ -6,6 +6,8 @@ import { Vehicle } from "../entity/Vehicle";
 import { Rental } from "../entity/Rental";
 import { Tenant } from "../entity/Tenant";
 import { User } from "../entity/User";
+import { VehiclePosition } from "../entity/VehiclePosition";
+
 
 
 export const get = (_req: Request, res: Response) => {
@@ -100,6 +102,7 @@ export async function createVehicleState(req: Request, res: Response) {
         const vehicleState= VehicleState.create({
         idRental:rental[rental.length-1].idRental
         })
+      
         await vehicleState.save()
         return res.status(200).json(vehicleState)
     } catch (error) {
