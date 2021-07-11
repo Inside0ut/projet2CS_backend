@@ -109,16 +109,7 @@ export async function validateSignal(req: Request, res: Response) {
         var agentSentNotif=null
         var agentTreatPanne=null
         for(var i=0;i<signals.length;i++){
-            agentSentNotif=null
-            agentTreatPanne=null
-            //get panne info 
-            const panneNotification=await BreakdownNotification.findOneOrFail({idSignal:signals[i].idSignal});
-            const panne=await Panne.findOneOrFail({idPanne:panneNotification.idPanne});
-            //get Agents info 
-            if(panne.idAgentSentNotif!=null)
-             agentSentNotif=await Agent.findOneOrFail({idAgent:panne.idAgentSentNotif});
-            if(panne.idAgentTreatPanne!=null) 
-             agentTreatPanne=await Agent.findOneOrFail({idAgent:panne.idAgentTreatPanne});
+          
             //get vehicle info 
             const vehicle = await Vehicle.findOneOrFail({idVehicle:signals[i].idVehicle});
             const rental = await Rental.find({idVehicle:signals[i].idVehicle});
@@ -129,10 +120,10 @@ export async function validateSignal(req: Request, res: Response) {
 
         
             if(signals[i].treated){
-            signalsTreated[index1]=Object.assign(signals[i],vehicle, rental[rental.length-1],user,{depatBorne:borneDepart.city,destBorne:borneDest.city},panne,{agentSentNotif:agentSentNotif},{agentTreatPanne:agentTreatPanne})
+            signalsTreated[index1]=Object.assign(signals[i],vehicle, rental[rental.length-1],user,{depatBorne:borneDepart.city,destBorne:borneDest.city})
             index1++
             }else{
-            signalsNotTreated[index2]=Object.assign(signals[i],vehicle, rental[rental.length-1],user,{depatBorne:borneDepart.city,destBorne:borneDest.city},panne,{agentSentNotif:agentSentNotif},{agentTreatPanne:agentTreatPanne})
+            signalsNotTreated[index2]=Object.assign(signals[i],vehicle, rental[rental.length-1],user,{depatBorne:borneDepart.city,destBorne:borneDest.city})
             index2++
             }
         }
@@ -158,20 +149,8 @@ export async function validateSignal(req: Request, res: Response) {
         var index1=0;
         var index2=0
         const signals = await Signal.find({signalType:"panne",validatedByAgent:0});
-        var agentSentNotif=null
-        var agentTreatPanne=null
         for(var i=0;i<signals.length;i++){
-            agentSentNotif=null
-            agentTreatPanne=null
-            //get panne info 
-            const panneNotification=await BreakdownNotification.findOneOrFail({idSignal:signals[i].idSignal});
-            const panne=await Panne.findOneOrFail({idPanne:panneNotification.idPanne});
-            //get Agents info 
-            if(panne.idAgentSentNotif!=null)
-             agentSentNotif=await Agent.findOneOrFail({idAgent:panne.idAgentSentNotif});
-            if(panne.idAgentTreatPanne!=null) 
-             agentTreatPanne=await Agent.findOneOrFail({idAgent:panne.idAgentTreatPanne});
-            //get vehicle info 
+  
             const vehicle = await Vehicle.findOneOrFail({idVehicle:signals[i].idVehicle});
             const rental = await Rental.find({idVehicle:signals[i].idVehicle});
             const tenant = await Tenant.findOneOrFail({idTenant:rental[rental.length-1].idTenant});
@@ -181,10 +160,10 @@ export async function validateSignal(req: Request, res: Response) {
 
         
             if(signals[i].treated){
-            signalsTreated[index1]=Object.assign(signals[i],vehicle, rental[rental.length-1],user,{depatBorne:borneDepart.city,destBorne:borneDest.city},panne,{agentSentNotif:agentSentNotif},{agentTreatPanne:agentTreatPanne})
+            signalsTreated[index1]=Object.assign(signals[i],vehicle, rental[rental.length-1],user,{depatBorne:borneDepart.city,destBorne:borneDest.city})
             index1++
             }else{
-            signalsNotTreated[index2]=Object.assign(signals[i],vehicle, rental[rental.length-1],user,{depatBorne:borneDepart.city,destBorne:borneDest.city},panne,{agentSentNotif:agentSentNotif},{agentTreatPanne:agentTreatPanne})
+            signalsNotTreated[index2]=Object.assign(signals[i],vehicle, rental[rental.length-1],user,{depatBorne:borneDepart.city,destBorne:borneDest.city})
             index2++
             }
         }

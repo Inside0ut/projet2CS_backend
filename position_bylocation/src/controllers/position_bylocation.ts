@@ -23,7 +23,7 @@ export const add_position_ByLocation = async (req: Request, res: Response) => {
 
     if(!Vehiclepos){
         const position=VehiclePosition.create({
-            idRental:idRental
+            idRental:idRental 
         })
         await position.save()
         const tracking=VehicleTracking.create({
