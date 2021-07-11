@@ -24,7 +24,6 @@ export async function getPannes(_req: Request, res: Response) {
     }
 }
 
-
 //get panne by id
 export async function getPanneById(req: Request, res: Response) {
     const idPanne = Number(req.params.idPanne);
@@ -36,7 +35,6 @@ export async function getPanneById(req: Request, res: Response) {
       return res.status(404).json({ message: "Panne introuvable" });
     }
 }
-
 
 //add new panne
 export const addPanne = async (req: Request, res: Response) => {
@@ -52,7 +50,9 @@ export const addPanne = async (req: Request, res: Response) => {
       });
   
       await panne.save();
-      return res.send(panne);
+      return res.status(200).json({
+        message: "panne ajoutée avec succès"
+      })
     } catch (err) {
       console.log(err);
       return res.status(500).json(err);
@@ -75,12 +75,10 @@ export async function deletePanne(req: Request, res: Response) {
   }
 }
 
-
 //update panne
 export async function updatePanne(req: Request, res: Response) {
     const idPanne = Number(req.params.idPanne);
     const { dateNotifPanne,idAgentSentNotif, state, idVehicle, description, severityLevel } = req.body;
-  
     try {
       const panne = await Panne.findOneOrFail({ idPanne });
   

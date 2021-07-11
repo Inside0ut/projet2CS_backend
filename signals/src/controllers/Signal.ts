@@ -7,13 +7,6 @@ import {User} from "../entity/User";
 import {BreakdownNotification} from "../entity/BreakdownNotification";
 import {Panne} from "../entity/Panne";
 import {Agent} from "../entity/Agent";
-
-
-
-
-
-
-
 import { getManager, Not } from "typeorm";
 import { Borne } from "../entity/Borne";
 
