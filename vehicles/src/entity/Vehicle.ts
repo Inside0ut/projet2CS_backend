@@ -47,6 +47,12 @@ export class Vehicle extends BaseEntity {
 
     @Column()
     chassisNumber:string;
+
+    @Column()
+    speed:number;
+
+    @Column()
+    numberOfPlaces:number;
     
     
 }
