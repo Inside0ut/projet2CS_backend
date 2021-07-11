@@ -53,7 +53,7 @@ export async function updateVehiclePosition(req: Request, res: Response){
     console.log(idVehicle) 
     try{
     var vehicle= await Vehicle.findOneOrFail({idVehicle:idVehicle})   
-    const rental = await Rental.find({idVehicle:idVehicle,rentalstate:"active"})
+    const rental = await Rental.find({idVehicle:idVehicle,rentalstate:"paid"})
     console.log(rental)
     const vehiclePosition= await VehiclePosition.find({idRental:rental[rental.length-1].idRental})
   
